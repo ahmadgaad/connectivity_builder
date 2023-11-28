@@ -1,5 +1,8 @@
 # connectivity_builder
 
+## Version 0.2.0
+* **License Update:** Updated the project license for improved clarity and compliance.
+
 ## Version 0.1.0
 
 ### Initial Release
@@ -7,6 +10,7 @@
 * Initial release of the connectivity_builder package.
 * Provides a widget for building different UI based on network connectivity status.
 * Uses connectivity_plus package to check for and listen to network changes.
+
 
 <!-- ## Version 0.0.2
 
