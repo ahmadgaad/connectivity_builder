@@ -19,8 +19,7 @@ The `connectivity_builder` package provides a simple and convenient way to manag
 ```yaml
 dependencies:
   connectivity_builder: ^latest_version
-
-
+```
 2. Run `flutter pub get` to install the package.
 
 ### Usage
@@ -32,7 +31,6 @@ ConnectivityBuilder(
   offlineBuilder: (context) => Center(child: Text('No internet connection available')),
   onlineBuilder: (context) => MyHomePage(),
 ),
-
 
 This will display a "No internet connection available" message when the device is offline and your app's main content when the device is online.
 
