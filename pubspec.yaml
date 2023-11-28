@@ -1,6 +1,6 @@
 name: connectivity_builder
 description: "Easily manage UI states based on network connectivity with the connectivity_builder package."
-version: 0.2.0
+version: 0.2.1
 homepage: https://github.com/ahmadgaad/connectivity_builder
 maintainers:
   - Ahmed Gad

@@ -1,5 +1,9 @@
 # connectivity_builder
 
+## Version 0.2.1
+* **Documentation:** Updated examples and added more code comments.
+  - The documentation has been enhanced to provide clearer usage instructions and code explanations.
+
 ## Version 0.2.0
 * **License Update:** Updated the project license for improved clarity and compliance.
 
