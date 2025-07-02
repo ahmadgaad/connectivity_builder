@@ -1,6 +1,6 @@
 # connectivity_builder
 
-# Need a great Flutter developer? [I'm available](https://www.linkedin.com/in/ahmed-gad-435635197/)
+# Need a great Flutter developer? [I'm available](https://www.linkedin.com/in/ahmed-gad-8760a735b/)
 
 The `connectivity_builder` package provides a simple and convenient way to manage different UI states based on the network connectivity status of your Flutter app.
 
