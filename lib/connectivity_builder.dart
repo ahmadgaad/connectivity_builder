@@ -5,67 +5,67 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
-/// Provides a widget that builds one widget if the device is online and another widget if the device is offline.
+/// A widget that builds different UIs based on network connectivity status.
 ///
-/// The [offlineBuilder] parameter is a callback that builds the widget to display when the device is offline.
-///
-/// The [onlineBuilder] parameter is a callback that builds the widget to display when the device is online.
+/// The [onlineBuilder] is shown when the device has an active network connection.
+/// The [offlineBuilder] is shown when there is no connection.
+/// The [loadingBuilder] is shown while the initial connectivity check is in progress.
+/// If [loadingBuilder] is not provided, [offlineBuilder] is used as a fallback.
 class ConnectivityBuilder extends StatefulWidget {
   const ConnectivityBuilder({
     super.key,
     required this.offlineBuilder,
     required this.onlineBuilder,
+    this.loadingBuilder,
   });
 
   final Widget Function(BuildContext context) offlineBuilder;
   final Widget Function(BuildContext context) onlineBuilder;
+  final Widget Function(BuildContext context)? loadingBuilder;
 
   @override
   State<ConnectivityBuilder> createState() => _ConnectivityBuilderState();
 }
 
 class _ConnectivityBuilderState extends State<ConnectivityBuilder> {
-  /// The connectivity service instance.
-  final connectivity = Connectivity();
+  final _connectivity = Connectivity();
 
-  /// The current connectivity result.
-  ConnectivityResult? isConnected;
+  /// null means the initial check hasn't completed yet.
+  bool? _isConnected;
 
-  /// The stream subscription for connectivity changes.
-  late StreamSubscription subscription;
+  late StreamSubscription<ConnectivityResult> _subscription;
+
   @override
   void initState() {
     super.initState();
 
-    /// Check the initial connectivity status.
-    connectivity.checkConnectivity().then((result) {
-      setState(() {
-        isConnected = result;
-      });
-    });
+    _connectivity.checkConnectivity().then(_updateStatus);
 
-    /// Subscribe to connectivity changes.
-    subscription = connectivity.onConnectivityChanged.listen((result) {
-      setState(() {
-        isConnected = result;
-      });
-    });
+    _subscription = _connectivity.onConnectivityChanged.listen(_updateStatus);
+  }
+
+  void _updateStatus(ConnectivityResult result) {
+    if (mounted) {
+      setState(() => _isConnected = result != ConnectivityResult.none);
+    }
   }
 
   @override
   void dispose() {
-    /// Unsubscribe from connectivity changes.
-    subscription.cancel();
+    _subscription.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    /// Determine which widget to build based on the connectivity status.
-    return isConnected != ConnectivityResult.none
-        /// The device is online, so build the online widget.
+    if (_isConnected == null) {
+      return widget.loadingBuilder != null
+          ? widget.loadingBuilder!(context)
+          : widget.offlineBuilder(context);
+    }
+
+    return _isConnected!
         ? widget.onlineBuilder(context)
-        /// The device is offline, so build the offline widget.
         : widget.offlineBuilder(context);
   }
 }

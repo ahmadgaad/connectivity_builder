@@ -1,6 +1,6 @@
 # connectivity_builder
 
-# Need a great Flutter developer? [I'm available](https://www.linkedin.com/in/ahmed-gad-8760a735b/)
+# Need a great Flutter developer? [I'm available](https://www.linkedin.com/in/ahmed-gad-567224405/)
 
 The `connectivity_builder` package provides a simple and convenient way to manage different UI states based on the network connectivity status of your Flutter app.
 
@@ -8,40 +8,51 @@ The `connectivity_builder` package provides a simple and convenient way to manag
 
 - **Effortless UI Adaptation:** Build distinct widgets for online and offline scenarios without manual network checks.
 - **Real-time Network Monitoring:** Automatically detect and respond to network connectivity changes, ensuring a seamless user experience.
+- **Loading State Support:** Show a custom widget while the initial connectivity check is in progress.
 - **Lightweight and Easy to Use:** Integrate the package seamlessly into your existing Flutter app with minimal effort.
 
 ## Getting Started
 
 ### Installation
 
-1. Add the `connectivity_builder` package to your pubspec.yaml file:
+1. Add the `connectivity_builder` package to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  connectivity_builder: ^latest_version
+  connectivity_builder: ^0.3.0
 ```
 
 2. Run `flutter pub get` to install the package.
 
 ### Usage
 
-The `ConnectivityBuilder` widget provides a simple way to manage UI states based on network connectivity:
+#### Basic usage
 
 ```dart
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: ConnectivityBuilder(
-          onlineBuilder: (context) => Center(child: Text('ONLINE 🌍')),
-          offlineBuilder: (context) => Center(child: Text('OFFLINE 🚫')),
-        ),
+@override
+Widget build(BuildContext context) {
+  return MaterialApp(
+    home: Scaffold(
+      body: ConnectivityBuilder(
+        onlineBuilder: (context) => Center(child: Text('ONLINE 🌍')),
+        offlineBuilder: (context) => Center(child: Text('OFFLINE 🚫')),
       ),
-    );
-  }
+    ),
+  );
+}
 ```
 
-This will display a "No internet connection available" message when the device is offline and your app's main content when the device is online.
+#### With a loading state
+
+Use `loadingBuilder` to show a custom widget while the initial connectivity check is in progress. If not provided, `offlineBuilder` is used as a fallback.
+
+```dart
+ConnectivityBuilder(
+  onlineBuilder: (context) => Center(child: Text('ONLINE 🌍')),
+  offlineBuilder: (context) => Center(child: Text('OFFLINE 🚫')),
+  loadingBuilder: (context) => Center(child: CircularProgressIndicator()),
+)
+```
 
 ## Additional Information
 

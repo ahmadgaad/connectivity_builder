@@ -1,5 +1,11 @@
 # connectivity_builder
 
+## Version 0.3.0
+* **Bug Fix:** Fixed incorrect online state shown on startup — widget now waits for the initial connectivity check before rendering.
+* **Bug Fix:** Fixed `setState` called after `dispose` by adding a `mounted` guard.
+* **New Feature:** Added optional `loadingBuilder` parameter to show a custom widget during the initial connectivity check.
+* **Documentation:** Updated README with new `loadingBuilder` usage example and correct version in installation snippet.
+
 ## Version 0.2.1
 * **Documentation:** Updated examples and added more code comments.
   - The documentation has been enhanced to provide clearer usage instructions and code explanations.
